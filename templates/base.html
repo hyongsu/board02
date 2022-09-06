@@ -1,0 +1,104 @@
+<!-- 기본적인 블록구조, CDN, bootstrap, 스타일 정의 및 지정  -->
+<!-- 기본적인 CDN 스크립트 입력하고 형식 따를 것  -->
+<!-- 파이널프로젝트 문제의 지정사항과 요구/준수사항을 확인하여 실행하여 확인할 것 -->
+
+
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="../../favicon.ico">
+    <title>{% block title %}byte Degree - Final Project{% endblock %}</title>
+
+
+<!-- jquery 코드 스크립트 -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+
+<!-- cdnjs.cloudflare, bootstrap 코드 스크립트 -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+            
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- maxcdn.bootstrapcdn 코드 스크립트 -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    {% block extra-style %}{% endblock %}
+</head>
+
+
+<body>
+    <!-- snippets 관련 참고 URL: https://bootsnipp.com/snippets/bxzmb -->
+    <!-- navigation 메뉴에 클래스로 지정하여 표시 -->
+    <!-- 로그인이 정상적으로 이뤄지면 logout은 녹색으로 표시하여 보기 편하게 처리 -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Byte Degree - Final Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_list' %}">Users</a>
+                </li>
+            </ul>
+            
+            {% if user.is_authenticated %}
+                <span style="color:lightgray;">{{user.username}}</span>
+                <a class="nav-item nav-link" href="{% url 'logout' %}" style="color:yellowgreen;">Logout <i class="fas fa-sign-out-alt"></i>
+                </a>
+
+            {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}" style="color:white;">Login <i class="fas fa-sign-in-alt"></i>
+                </a>
+                <a class="nav-item nav-link" href="{% url 'register' %}" style="color:white;">Registration <i class="fas fa-user-plus"></i>
+                </a>
+
+            {% endif %}
+        </div>
+    </nav>
+
+{% block contents %}{% endblock %}
+
+
+
+<!-- footer 마무리 처리 -->
+{% block footer %}{% endblock %}
+
+<script>
+
+
+/* 상단 메뉴 클릭 시 클릭된 메뉴 활성화 처리 */
+// 코드 작성 및 연동관계에 대해 주의할 것
+
+$(document).ready(function() {
+  $('li.active').removeClass('active').removeAttr('aria-current');
+  $('a[href="' + location.pathname + '"]').closest('li').addClass('active').attr('aria-current', 'page');
+});
+</script>
+
+
+{% block extra-script %}{% endblock %}
+
+</body>
+</html>
+
+
+<!-- 코드 마무리, 더블체크 할 것!!! -->
+<!-- 불필요한 각주는 삭제할 것!! -->
+

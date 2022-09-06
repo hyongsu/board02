@@ -1,0 +1,47 @@
+<!-- 로그인 한 유저의 이름을 보여주고 그렇지 않은 경우 아무도 로그인 되지 않았다고 표시
+    (색깔을 달리 처리함 - 로그인 안되어 있을 경우 핑크색, 로그인 시 파란색) -->
+<!-- base.html의 확장으로 페이지를 보여주는 기능 처리 -->
+
+
+{% extends "base.html" %}
+{% load static %}
+{% comment %} TODO: 5. base.html 템플릿을 만들어 모든 페이지에서 상속받아 보여주세요 {% endcomment %}
+
+<!--지정사항
+  {% comment %} TODO: 6. bootstrap 스타일을 적용해주세요	 {% endcomment %}
+-->
+<!-- 로그인이 정상적으로 이뤄지면 로그인 ID가 Hellow 다음에 표시됨 -->
+
+
+{% block contents %}
+<div id="container">
+    {% comment %} TODO: 4. /index 페이지에는 로그인 한 유저 이름을 출력해야 합니다. ex) hello, 홍길동 {% endcomment %}
+
+
+    <div class="col-lg-2">
+    {% if user.is_authenticated %}
+        <center><h1 style="color:blue;">Hello, {{ user.username }} </h1></center>
+    {% else %}
+        <center><h1 style="color:rgb(255, 0, 183);">No one logged-in!!</h1></center>
+    {% endif %}
+    </div>
+
+</div>
+
+
+
+<!-- 초기 화면에 이미지(Final Project)가 최적화되어 표시되도록 처리 (반복하여 입력해본 결과 650px가 최적치) -->
+<style>
+#container{
+    background: url("/static/images/main_image_01.jpg") scroll;
+    background-size: cover;
+    min-height: 650px;
+}
+</style>
+
+{% endblock %}
+
+
+
+<!-- 전체적으로 연동 및 최적화 화면으로 보이도록 더블체크할 것 (미적인 요소 포함)!!! -->
+
